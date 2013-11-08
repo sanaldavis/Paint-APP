@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title> A Simple Paint Application </title>
-    <style>
-       body  {
-              background:#dddddd;
-	     }
-       #canvas {
-		margin: 20px;
-		padding: 20px;
-		background: #ffffff;
-		border: thin inset #aaaaaa;
-	       }
-   
-     </style>  
-  </head>
-  <body>
-    <canvas id='canvas' width='700' height='500'>
-	canvas not supported	
-    </canvas>
-    <script src='paint.js'></script>
-  </body>
+	<head>
+		<title> A Simple Paint Application </title>
+		<style>
+		body  {
+	              background:#dddddd;
+		     }
+	       #canvas {
+			margin: 20px;
+			padding: 20px;
+			background: #ffffff;
+			border: thin inset #aaaaaa;
+	      		 }
+		</style>  
+	</head>
+	<body>
+		<div id='radio'>
+
+		<input type='radio' id='reset' name='reset'/>Reset
+
+		<input id='line' type='button' value='Line'>
+			
+		</div>
+
+		<canvas id='canvas' width='700' height='500'>
+			canvas not supported	
+		</canvas>
+		
+		<script src='paint.js'></script>
+	</body>
 </html>

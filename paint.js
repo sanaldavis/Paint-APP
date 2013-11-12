@@ -2,74 +2,85 @@ var canvas= document.getElementById('canvas');
 var context= canvas.getContext('2d');
 reset=document.getElementById('reset');
 line=document.getElementById('line');
+rect=document.getElementById('rect');
+circle=document.getElementById('circle');
+var draw=0;
 
-function make_Rect() {
-	context.strokeRect(10,10,100,100);
-	context.fillStyle= 'rgba(0,0,255,0.5)';
-	context.fillRect(120,120,300,300);
-}
-
-function make_Text() {
-	context.font= "24px Helvetica"
-	context.fillText("Click anywhere to erase",120,150);
-}
-
-
-function make_Line() {
-	context.lineWidth= 1;
-	context.beginPath();
-	context.moveTo(50,10);
-	context.lineTo(450,10);
-	context.stroke();
-	context.beginPath();
-	context.moveTo(50.50,50.50);
-	context.lineTo(450.50,50.50);
-	context.stroke();
-}
-
-function Gradient() {
-	gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-	gradient.addColorStop(0, 'blue');
-	gradient.addColorStop(0.25, 'white');
-	gradient.addColorStop(0.5, 'purple');
-	gradient.addColorStop(0.75, 'red');
-	gradient.addColorStop(1, 'yellow');
-	context.fillStyle = gradient;
-	context.rect(0, 0, canvas.width, canvas.height);
-}
-
-function stroke_Rect() {
-	context.beginPath();
-	context.rect(450, 150, 150,100);
-	context.stroke();
-	context.fill();
-}
-
-make_Text();
-make_Rect();
-make_Line();
-stroke_Rect();
-//Gradient();
-
-reset.onclick= function (e) {
+reset.onclick= function (e) 
+{
+	draw='';
 	context.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-line.onclick= function (e) {
-	//alert("hai");
-	context.canvas.onmousedown = function(e) 
+line.onclick= function (e) 
+{
+	draw=1;
+	if (draw==1) 
 	{
-	 start_x=e.x;
-	 start_y=e.y;
+		canvas.onmousedown=function (e) 
+		{
+		img=context.getImageData(0,0,canvas.width,canvas.height); 
+		start_x=e.x;
+		start_y=e.y;
+		drag=true;
+		}
+		canvas.onmousemove= function(e)
+		{
+			if(drag)
+			{
+			context.putImageData(img,0,0);
+         		end_x=e.x;
+		        end_y=e.y;
+			context.beginPath();
+			context.moveTo(start_x, start_y);
+        		context.lineTo(end_x, end_y);
+			context.stroke();
+			context.closePath();
+		}	}
+		canvas.onmouseup= function(e)
+                {
+                drag=false;
+                }
+
+
+   	}
+}
+
+
+rect.onclick= function (e) 
+{
+	
+	draw=2;
+	//alert(draw);	
+	if(draw==2) 
+	{
+		canvas.onmousedown= function(e) 
+		{
+		img=context.getImageData(0, 0, canvas.width, canvas.height);
+		drag=true;
+        	start_x=e.x;
+        	start_y=e.y
+        	}
+		canvas.onmouseup = function(e) 
+  		{
+		drag=false;
+		}
+		canvas.onmousemove= function(e)
+		{
+			if(drag)
+			{
+			context.putImageData(img, 0, 0);
+			end_x=e.x-start_x;
+			end_y=e.y-start_y
+			context.strokeRect(start_x, start_y, end_x, end_y);
+			}
+   		}	
 	}
-	//alert(start_x,start_y);
-	context.canvas.onmouseup = function(e)
-        {
-         end_x=e.x;
-         end_y=e.y;
-	context.beginPath();
-	context.moveTo(start_x, start_y);
-        context.lineTo(end_x, end_y);
-	context.stroke();
-	}
-};
+}
+
+
+circle.onclick= function(e)
+{
+	alert('hai');
+}
+

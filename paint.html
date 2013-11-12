@@ -4,23 +4,26 @@
 		<title> A Simple Paint Application </title>
 		<style>
 		body  {
-	              background:#dddddd;
+	              background: #eeeeee;
 		     }
-	       #canvas {
-			margin: 20px;
-			padding: 20px;
+	       canvas {
+
 			background: #ffffff;
-			border: thin inset #aaaaaa;
+			border: thin inset red;
 	      		 }
 		</style>  
 	</head>
 	<body>
 		<div id='radio'>
 
-		<input type='radio' id='reset' name='reset'/>Reset
+		<input id='reset' type='button' value='Reset'>
 
 		<input id='line' type='button' value='Line'>
+
+		<input id='rect' type='button' value='Rectangle'>
 			
+		<input id='circle' type='button' value='Circle'>		
+
 		</div>
 
 		<canvas id='canvas' width='700' height='500'>

@@ -5,7 +5,10 @@ line=document.getElementById('line');
 rect=document.getElementById('rect');
 circle=document.getElementById('circle');
 pencile=document.getElementById('pencil');
+fill=document.getElementById('fill');
+stroke=document.getElementById('stroke');
 width=document.getElementById('width');
+erase=document.getElementById('erase');
 var draw=0;
 
 reset.onclick= function (e) 
@@ -88,7 +91,7 @@ circle.onclick= function(e)
 	draw=3;
 	if(draw==3)
 	{
-		 canvas.onmousedown= function(e)
+		canvas.onmousedown= function(e)
                 {
                 img=context.getImageData(0, 0, canvas.width, canvas.height);
                 drag=true;
@@ -127,7 +130,7 @@ pencile.onclick= function (e)
         draw=4;
         if (draw==4)
         {
-                canvas.onmousedown=function (e)
+		canvas.onmousedown=function (e)
                 {
                 //img=context.getImageData(0,0,canvas.width,canvas.height);
                 start_x=e.x;
@@ -153,6 +156,30 @@ pencile.onclick= function (e)
                 canvas.onmouseup= function(e)
                 {
                 drag=false;
+                }
+        }
+}
+
+
+
+erase.onclick= function (e)
+{
+
+        draw=5;
+        if(draw==5)
+        {
+		canvas.onmousedown= function (e)
+                        {drag=true;}
+                canvas.onmouseup= function (e)
+                        {drag=false;}
+                
+                canvas.onmousemove= function(e)
+                {
+			if(drag)
+			{
+                        x=width.value;
+                        context.clearRect(e.x, e.y, 10+x, 10+x);
+                        }
                 }
         }
 }

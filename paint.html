@@ -25,7 +25,9 @@
 		<input id='circle' type='button' value='Circle'>		
 
 		<input id='pencil' type='button' value='Pencil'>
-		
+
+		<input id='erase' type='button' value='Erase'>
+						
 		Width <select id='width'>
                 <option value='1' selected> 1 </option>
                 <option value='2'> 2 </option>
@@ -34,12 +36,19 @@
                 <option value='5'> 5 </option>
 		</select>		
 
+		<input id='stroke' type='radio' checked/> Stroke
+                <input id='fill' type='radio' /> Fill
+
 		</div>
 
 		<canvas id='canvas' width='700' height='500'>
 			canvas not supported	
 		</canvas>
-		
+			
+		<br>
+
+		 <input id='color' type='button' value='Colour'>
+	
 		<script src='paint.js'></script>
 	</body>
 </html>

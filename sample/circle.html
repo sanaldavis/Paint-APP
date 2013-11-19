@@ -1,0 +1,49 @@
+<html>
+
+ <canvas id="canvas" width="500" height="375">
+ </canvas>
+<style>
+canvas { border: 1px solid red;
+	 background-color: yellow;
+	}
+</style>
+                         
+<script>
+var canvas=document.getElementById('canvas');
+var context= canvas.getContext('2d');
+
+
+canvas.onmousedown= down;
+function down(e) {
+      img=context.getImageData(0,0,canvas.width,canvas.height);	
+	start_x=e.x;
+	start_y=e.y;
+	draw=true;
+}
+canvas.onmouseup= up;
+function up(e){
+	draw=false;
+}
+
+canvas.onmousemove=move;
+ function move (e) {
+	if(draw)
+        {
+	context.putImageData(img,0,0);
+	context.beginPath();
+         end_x=e.x;
+         end_y=e.y;
+	dx=Math.abs(end_x-start_x);
+	dy=Math.abs(end_y-start_y);
+	midx=(start_x+end_x)/2;
+	midy=(start_y+end_y)/2;
+	radius=Math.sqrt(dx*dx + dy*dy)/2;	
+	context.arc(midx, midy, radius, 0, Math.PI*2, false);
+//	context.arcTo(start_x, start_y, end_x , end_y, 50);
+	context.stroke();
+	context.closePath();
+	}
+   }
+</script>
+</html>
+

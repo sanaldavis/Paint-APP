@@ -1,5 +1,8 @@
+
 var canvas= document.getElementById('canvas');
 var context= canvas.getContext('2d');
+
+
 reset=document.getElementById('reset');
 line=document.getElementById('line');
 rect=document.getElementById('rect');
@@ -11,12 +14,22 @@ width=document.getElementById('width');
 erase=document.getElementById('erase');
 var draw=0;
 
+//function which set the color when we click the color_button
+function color(value)
+{
+	context.fillStyle=value;
+	context.strokeStyle=value;
+}
+
+//function for reseting
 reset.onclick= function (e) 
 {
 	
 	context.clearRect(0, 0, canvas.width, canvas.height);
 };
 
+
+//To draw a line
 line.onclick= function (e) 
 {
 	
@@ -54,6 +67,7 @@ line.onclick= function (e)
 }
 
 
+//Draw the rectangle
 rect.onclick= function (e) 
 {
 	
@@ -80,12 +94,17 @@ rect.onclick= function (e)
 			end_y=e.y-start_y;
 			context.lineWidth=width.value;
 			context.strokeRect(start_x, start_y, end_x, end_y);
-			}
-   		}	
+			if(f==1)
+				{
+				context.fillRect(start_x,start_y,end_x,end_y);
+				}
+			}	
+		}
 	}
 }
 
 
+//Draw the circle
 circle.onclick= function(e)
 {
 	draw=3;
@@ -118,13 +137,17 @@ circle.onclick= function(e)
 			context.lineWidth=width.value;
 		        context.arc(midx, midy, radius, 0, Math.PI*2, false);
 		        context.stroke();
+			if(f==1)
+				{
+				context.fill();
+				}
                         }
                 }
 	}
 }
 
 
-
+//Draw using pencil
 pencile.onclick= function (e)
 {
         draw=4;
@@ -161,7 +184,7 @@ pencile.onclick= function (e)
 }
 
 
-
+//Erase after drawing
 erase.onclick= function (e)
 {
 
@@ -177,10 +200,22 @@ erase.onclick= function (e)
                 {
 			if(drag)
 			{
-                        x=width.value;
-                        context.clearRect(e.x, e.y, 10+x, 10+x);
+                        //x=width.value;
+                        context.clearRect(e.x, e.y, 20, 20);
                         }
                 }
         }
 }
 
+
+fill.onclick= function (e)
+{
+	f=1;
+
+}
+
+stroke.onclick= function (e)
+{
+	f=0;
+
+}
